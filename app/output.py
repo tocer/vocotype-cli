@@ -119,24 +119,13 @@ def _simulate_ctrl_v() -> bool:
 
         keyboard = Controller()
 
-        # 先尝试 Ctrl+Shift+V（终端通用）
-        # 如果失败，回退到 Ctrl+V（GUI 应用）
-        try:
-            # 尝试 Ctrl+Shift+V
-            with keyboard.pressed(Key.ctrl, Key.shift):
-                keyboard.press('v')
-                keyboard.release('v')
-            time.sleep(0.05)
-            logger.debug("使用 Ctrl+Shift+V 模拟粘贴（终端）")
-            return True
-        except Exception as e:
-            # 回退到 Ctrl+V
-            with keyboard.pressed(Key.ctrl):
-                keyboard.press('v')
-                keyboard.release('v')
-            time.sleep(0.05)
-            logger.debug("使用 Ctrl+V 模拟粘贴（GUI 应用）")
-            return True
+        # 使用 Ctrl+V（跨平台通用）
+        with keyboard.pressed(Key.ctrl):
+            keyboard.press('v')
+            keyboard.release('v')
+        time.sleep(0.05)
+        logger.debug("使用 Ctrl+V 模拟粘贴")
+        return True
 
     except Exception as exc:
         logger.debug("模拟粘贴失败: %s", exc)
