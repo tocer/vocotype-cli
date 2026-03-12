@@ -24,7 +24,7 @@ _last_toggle_time = 0.0
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Speak Keyboard prototype")
-    parser.add_argument("--config", help="Path to config JSON")
+    parser.add_argument("--config", default="config.json", help="Path to config JSON")
     parser.add_argument(
         "--once",
         action="store_true",
